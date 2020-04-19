@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <head>
-    <title>Webpack Starter Kit</title>
-  </head>
-  <body>
-    <h1>Webpack Starter Kit</h1>
 
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+<head>
+  <title>The Overlook Hotel</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet">
+</head>
 
-    <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
-  </body>
+<body>
+  <header>
+    <h1>The Overlook Hotel</h1>
+    <h2 class='welcome-message hidden'>Welcome, user!</h2>
+  </header>
+  <main class='main-content-display'>
+    <section alt='Login Page' class='login-page hidden'>
+      <section id='login-card'>
+        <h2>Welcome, please sign in:</h2>
+        <p>Username:</p>
+        <input type='text' name='username' placeholder='Enter username here'>
+        <p>Password:</p>
+        <input type='password' name='password' placeholder='Enter password here'>
+        <button type='submit' class='submit-button' id='login-button'>Sign in</button>
+      </section>
+    </section>
+    <section alt='Manager Dashboard' class='manager-dashboard-page hidden'>
+      <section alt='Current occupancy statistics' class='todays-statistics-container'>
+        <h2>Today's Occupancy Details:</h2>
+        <section class='occupancy-statistics-container'>
+          <section class='statistics-container'>
+            <p>Total Rooms Available: </p>
+            <p id='number-rooms-available'>500</p>
+          </section>
+          <section class='statistics-container'>
+            <p>Today's Revenue: </p>
+            <p id='todays-revenue'>$2304</p>
+          </section>
+          <section class='statistics-container'>
+            <p>Occupancy Percentage: </p>
+            <p id='occupancy-percentage'>45%</p>
+          </section>
+        </section>
+      </section>
+      <section alt='Search customer bookings' class='manager-view-data'>
+        <section alt='Search for customer data' class='search-customer-container'>
+          <h2>Search Customer by Name:</h2>
+          <input alt='Customer search form' type='text' placeholder='Customer name'>
+        </section>
+        <section alt='Customer bookings' class='manager-search-results'>
+        </section>
+      </section>
+    </section>
+    <section alt='Customer dashboard' class='customer-dashboard-page'>
+    <section alt='Make a new reservation box' class='new-reservation-container'>
+    <p>Make a new reservation today!</p>
+    <input type='button' value='Book now!'>
+    </section>
+
+    </section>
+  </main>
+  <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
+</body>
+
 </html>

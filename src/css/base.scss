@@ -1,6 +1,152 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+$primary-background: #94D1FF;
+$secondary-background: #48B0FF;
+$outline: #245990;
+$text: black;
+$active-text: #398CCC;
+$header-height: 10vh;
+
+* {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
 
 body {
   background-color: $primary-background;
+}
+
+header {
+  width: 100vw;
+  height: $header-height;
+  background: $secondary-background;
+  color: $text;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  position: fixed;
+  z-index: 10000;
+  margin: 0;
+  border: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+main {
+  display: inline-block;
+}
+
+input {
+  height: 35px;
+  margin: 5px 45px 5px 15px;
+  padding: 3px;
+  font-size: 1em;
+  border: 1px solid $outline;
+  border-radius: 3px;
+}
+
+.main-content-display {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  height: 90vh;
+  top: $header-height;
+}
+
+.login-page {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#login-card {
+  height: 30vh;
+  margin-top: 10%;
+  width: 25vw;
+  border: 2px solid $outline;
+  background-color: $secondary-background;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.login-page h2{
+  display: inline-block;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  padding: 0px;
+}
+
+.login-page p{
+  display: block;
+  margin: 5px 5px 5px 10px;
+}
+.login-page input{
+  height: 35px;
+  margin: 5px 45px 5px 15px;
+  padding: 3px;
+  font-size: 1em;
+  border: 1px solid $outline;
+  border-radius: 3px;
+}
+
+.submit-button {
+  display: inline-block;
+  height: 35px;
+  padding: 5px 10px 5px 10px;
+  margin: 0px 0px 0px 0px;
+  border: 1px solid $outline;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.manager-dashboard-page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.todays-statistics-container {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 50px 0px 50px;
+  border: 1px solid $outline;
+}
+
+.todays-statistics-container h2{
+  padding-bottom: 10px;
+}
+
+.occupancy-statistics-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.statistics-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.statistics-container p {
+  padding-right: 3px;
+}
+
+.manager-view-data {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 50px 0px 50px;
+  border: 1px solid $outline;
+}
+
+.customer-dashboard-page {
+  
+}
+
+
+.hidden {
+  display: none;
 }
