@@ -105,45 +105,130 @@ input {
 .manager-dashboard-page {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
 }
 
 .todays-statistics-container {
   display: flex;
-  flex-direction: column;
-  margin: 15px 50px 0px 50px;
-  border: 1px solid $outline;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid $outline;
+  background-color: $secondary-background;
+  border-radius: 10px;
+  width: 80%;
 }
 
-.todays-statistics-container h2{
-  padding-bottom: 10px;
+.manager-dashboard-page h2{
+  display: inline-block;
+  padding: 10px;
 }
 
 .occupancy-statistics-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.statistics-container {
+.statistic-container {
   display: flex;
   flex-direction: row;
-}
-
-.statistics-container p {
-  padding-right: 3px;
+  margin: 5px;
+  p {
+    padding-right: 5px;
+    font-size: 1.2em;
+  }
 }
 
 .manager-view-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 5px;
+    padding: 10px;
+    border: 2px solid $outline;
+    background-color: $secondary-background;
+    border-radius: 10px;
+    margin: 10px;
+    width: 80%;
+}
+
+.manager-search-container {
   display: flex;
-  flex-direction: column;
-  margin: 15px 50px 0px 50px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  width: 100%;
+}
+
+.manager-search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+}
+
+.manager-reservation-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px;
+  padding: 10px;
+  border: 2px solid $outline;
+  background-color: $secondary-background;
+  border-radius: 10px;
+  width: 80%;
+}
+
+.manager-button-create-reservation {
+  display: inline-block;
+  height: 35px;
+  padding: 5px 10px 5px 10px;
+  // margin: 0px 0px 0px 0px;
   border: 1px solid $outline;
+  border-radius: 5px;
+  font-size: 1em;
 }
 
 .customer-dashboard-page {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.new-reservation-container {
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+}
+
+.customer-reservations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 50px 0px 50px;
+  width: 100%;
+}
+
+.customer-reservation-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+  border: 2px solid $outline;
+  background-color: $secondary-background;
+  border-radius: 10px;
+  width: 80%;
 }
 
 

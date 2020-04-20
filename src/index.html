@@ -22,39 +22,73 @@
         <button type='submit' class='submit-button' id='login-button'>Sign in</button>
       </section>
     </section>
-    <section alt='Manager Dashboard' class='manager-dashboard-page hidden'>
+    <section alt='Manager Dashboard' class='manager-dashboard-page'>
+      <h2>Today's Occupancy Details</h2>
       <section alt='Current occupancy statistics' class='todays-statistics-container'>
-        <h2>Today's Occupancy Details:</h2>
         <section class='occupancy-statistics-container'>
-          <section class='statistics-container'>
+          <section class='statistic-container'>
             <p>Total Rooms Available: </p>
             <p id='number-rooms-available'>500</p>
           </section>
-          <section class='statistics-container'>
+          <section class='statistic-container'>
             <p>Today's Revenue: </p>
             <p id='todays-revenue'>$2304</p>
           </section>
-          <section class='statistics-container'>
+          <section class='statistic-container'>
             <p>Occupancy Percentage: </p>
             <p id='occupancy-percentage'>45%</p>
           </section>
         </section>
       </section>
       <section alt='Search customer bookings' class='manager-view-data'>
-        <section alt='Search for customer data' class='search-customer-container'>
-          <h2>Search Customer by Name:</h2>
-          <input alt='Customer search form' type='text' placeholder='Customer name'>
+        <section alt='Search for customer data' class='manager-search-container'>
+          <h2>Search Customer by Name:
+          <input alt='Customer search form' type='text' placeholder='Customer name'></h2>
+          <button type='submit' class='manager-button-create-reservation' id='manager-book-button'>Make a New Reservation</button>
         </section>
-        <section alt='Customer bookings' class='manager-search-results'>
+      </section>
+      <section alt='Customer bookings' class='manager-search-results'>
+        <section alt='Reservation Information' class='manager-reservation-card'>
+          <p class='res-card-date'>Date:</p>
+          <p class='res-card-room'>Room number:</p>
+          <p class='res-card-cost'>Cost:</p>
+          <button type='submit' class='submit-button' id='cancel-reservation-button'>Cancel Reservation</button>
         </section>
       </section>
     </section>
-    <section alt='Customer dashboard' class='customer-dashboard-page'>
-    <section alt='Make a new reservation box' class='new-reservation-container'>
-    <p>Make a new reservation today!</p>
-    <input type='button' value='Book now!'>
     </section>
-
+    <section alt='Customer dashboard' class='customer-dashboard-page hidden'>
+      <section alt='Make a new reservation box' class='new-reservation-container'>
+        <button type='submit' class='submit-button' id='customer-book-button'>Click Here to Make a New Reservation</button>
+      </section>
+      <section alt='Customer past and present reservations' class='customer-reservations'>
+        <section alt='Upcoming stays' class='customer-reservations'>
+          <h2 class='reservation-type'>Upcoming Stays</h2>
+          <section alt='Reservation Information' class='customer-reservation-card'>
+            <p class='res-card-date'>Date:</p>
+            <p class='res-card-room'>Room number:</p>
+            <p class='res-card-cost'>Cost:</p>
+          </section>
+          <section alt='Reservation Information' class='customer-reservation-card'>
+            <p class='res-card-date'>Date:</p>
+            <p class='res-card-room'>Room number:</p>
+            <p class='res-card-cost'>Cost:</p>
+          </section>
+          <section alt='Reservation Information' class='customer-reservation-card'>
+            <p class='res-card-date'>Date:</p>
+            <p class='res-card-room'>Room number:</p>
+            <p class='res-card-cost'>Cost:</p>
+          </section>
+        </section>
+      </section>
+      <section alt='Past stays' class='customer-reservations'>
+        <h2 class='reservation-type'>Past Stays</h2>
+        <section alt='Reservation Information' class='customer-reservation-card'>
+          <p class='res-card-date'>Date:</p>
+          <p class='res-card-room'>Room number:</p>
+          <p class='res-card-cost'>Cost:</p>
+        </section>
+      </section>
     </section>
   </main>
   <!-- Do not include the index.js or main.bundle.js file here - it is done automatically by the webpack server -->
