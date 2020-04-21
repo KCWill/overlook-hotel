@@ -4,25 +4,27 @@
 <head>
   <title>The Overlook Hotel</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap" rel="stylesheet">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
 </head>
 
 <body>
   <header>
     <h1>The Overlook Hotel</h1>
-    <h2 class='welcome-message hidden'>Welcome, user!</h2>
+    <h2 class='welcome-message'>Welcome!</h2>
   </header>
   <main class='main-content-display'>
-    <section alt='Login Page' class='login-page hidden'>
+    <section alt='Login Page' class='login-page'>
       <section id='login-card'>
         <h2>Welcome, please sign in:</h2>
         <p>Username:</p>
-        <input type='text' name='username' placeholder='Enter username here'>
+        <input type='text' name='username' placeholder='Enter username here' id='username-form'>
         <p>Password:</p>
-        <input type='password' name='password' placeholder='Enter password here'>
+        <input type='password' name='password' placeholder='Enter password here' id='password-form'>
         <button type='submit' class='submit-button' id='login-button'>Sign in</button>
       </section>
     </section>
-    <section alt='Manager Dashboard' class='manager-dashboard-page'>
+    <section alt='Manager Dashboard' class='manager-dashboard-page hidden'>
       <h2>Today's Occupancy Details</h2>
       <section alt='Current occupancy statistics' class='todays-statistics-container'>
         <section class='occupancy-statistics-container'>

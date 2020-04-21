@@ -1,11 +1,30 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you import jQuery into a JS file if you use jQuery in that file
 import $ from 'jquery';
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/base.scss';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import User from './User.js'
+import Manager from './User.js'
+import Customer from './User.js'
+import Dashboard from './Dashboard.js'
+import ManagerDashboard from './Dashboard.js'
+import CustomerDashboard from './Dashboard.js'
+$('#login-button').click(userLogIn);
+
+function userLogIn(){
+  let username = $('#username-form').val();
+  let password = $('#password-form').val();
+  let user = new User(username,password);
+  user = user.findTypeOfUser();
+  console.log('boom',user)
+  if (user.verifyLogIn()){
+    displayDashboard(user);
+  }
+}
+
+function displayDashboard(user){
+  $('.login-page').toggleClass('hidden');
+  let dashboardDisplay = user.goToDashboard(user);
+  console.log('dash display', dashboardDisplay)
+  dashboardDisplay.displayData();
+  let message = dashboardDisplay.welcome();
+  $('.welcome-message').text(message);
+}
