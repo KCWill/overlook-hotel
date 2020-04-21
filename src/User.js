@@ -6,7 +6,7 @@ class User {
   constructor(username, password){
     this.username = username;
     this.password = password;
-    this.userId = '';
+    this.userId = 0;
   }
   findTypeOfUser() {
     if(this.username === 'manager'){
@@ -27,7 +27,6 @@ class Manager extends User {
   }
   verifyLogIn(){
     if (this.password === 'overlook2020'){
-      console.log('Welcome, manager!')
       return true
     } else {
       alert('Manager, please check your password!')
@@ -39,10 +38,10 @@ class Manager extends User {
     this.userId = 'manager';
   }
 
-  goToDashboard(user){
+  goToDashboard(){
     $('.manager-dashboard-page').toggleClass('hidden')
-    let dashboard = new Dashboard(user,this.userId);
-    let managerDashboard = dashboard.dashboardPicker(user);
+    let dashboard = new Dashboard(this.userId);
+    let managerDashboard = dashboard.dashboardPicker();
     return managerDashboard
   }
 }
@@ -55,7 +54,6 @@ class Customer extends User {
   }
   verifyLogIn(){
     if (this.password === 'overlook2020' && parseInt(this.username.slice(8)) < 51 && parseInt(this.username.slice(8)) > 0) {
-      console.log(parseInt(this.username.slice(8)))
       return true
     } else {
       alert('Customer, please check your password and/or your username!')
@@ -70,10 +68,9 @@ class Customer extends User {
   goToDashboard(user){
     $('.customer-dashboard-page').toggleClass('hidden');
     let dashboard = new Dashboard(this.userId);
-    console.log('dashboard', dashboard)
-    let customerDashboard = dashboard.dashboardPicker(user);
-    console.log('hey',customerDashboard)
+    let customerDashboard = dashboard.dashboardPicker();
     customerDashboard.welcome();
+    customerDashboard.displayBookings()
     return customerDashboard
   }
 }

@@ -41,13 +41,16 @@ function makeFetchHappen() {
 }
 
 
-function displayDashboard(user, userId){
+function displayDashboard(user){
   $('.login-page').toggleClass('hidden');
-  let dashboardDisplay = user.goToDashboard(user);
-  console.log('dbD',dashboardDisplay)
-  dashboardDisplay.displayData();
-  console.log('dbD',dashboardDisplay)
+  let dashboardDisplay = user.goToDashboard();
+  dashboardDisplay.displayName();
   let message = dashboardDisplay.welcome();
+  let bookings = dashboardDisplay.displayBookings();
+  let cost = dashboardDisplay.displayTotalCost();
+  console.log('cost',cost);
+  $('#customer-cost').append(cost);
+  $('.customer-reservations').append(bookings);
   $('.welcome-message').text(message);
 }
 export default allData

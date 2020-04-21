@@ -17,10 +17,14 @@
     <section alt='Login Page' class='login-page'>
       <section id='login-card'>
         <h2>Welcome, please sign in:</h2>
-        <p>Username:</p>
+        <label>
+          <p>Username:</p>
         <input type='text' name='username' placeholder='Enter username here' id='username-form'>
+        </label>
+        <label>
         <p>Password:</p>
-        <input type='password' name='password' placeholder='Enter password here' id='password-form'>
+        <input type='password' alt='Enter your password here' name='password' placeholder='Enter password here' id='password-form'>
+        </label>
         <button type='submit' class='submit-button' id='login-button'>Sign in</button>
       </section>
     </section>
@@ -62,25 +66,13 @@
     <section alt='Customer dashboard' class='customer-dashboard-page hidden'>
       <section alt='Make a new reservation box' class='new-reservation-container'>
         <button type='submit' class='submit-button' id='customer-book-button'>Click Here to Make a New Reservation</button>
+        <section alt='Total Cost of Your Stays' >
+        <h3 id='customer-cost'>Your Running Total Charges: $</h3>
+        </section>
       </section>
       <section alt='Customer past and present reservations' class='customer-reservations'>
         <section alt='Upcoming stays' class='customer-reservations'>
           <h2 class='reservation-type'>Upcoming Stays</h2>
-          <section alt='Reservation Information' class='customer-reservation-card'>
-            <p class='res-card-date'>Date:</p>
-            <p class='res-card-room'>Room number:</p>
-            <p class='res-card-cost'>Cost:</p>
-          </section>
-          <section alt='Reservation Information' class='customer-reservation-card'>
-            <p class='res-card-date'>Date:</p>
-            <p class='res-card-room'>Room number:</p>
-            <p class='res-card-cost'>Cost:</p>
-          </section>
-          <section alt='Reservation Information' class='customer-reservation-card'>
-            <p class='res-card-date'>Date:</p>
-            <p class='res-card-room'>Room number:</p>
-            <p class='res-card-cost'>Cost:</p>
-          </section>
         </section>
       </section>
       <section alt='Past stays' class='customer-reservations'>
