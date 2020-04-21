@@ -14,7 +14,6 @@ function userLogIn(){
   let password = $('#password-form').val();
   let user = new User(username,password);
   user = user.findTypeOfUser();
-  console.log('boom',user)
   if (user.verifyLogIn()){
     displayDashboard(user);
   }
@@ -23,8 +22,10 @@ function userLogIn(){
 function displayDashboard(user){
   $('.login-page').toggleClass('hidden');
   let dashboardDisplay = user.goToDashboard(user);
-  console.log('dash display', dashboardDisplay)
+  console.log('dbD',dashboardDisplay)
   dashboardDisplay.displayData();
+  console.log('dbD',dashboardDisplay)
   let message = dashboardDisplay.welcome();
   $('.welcome-message').text(message);
+
 }

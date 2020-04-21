@@ -2,7 +2,10 @@ import $ from 'jquery';
 import User from './User.js'
 import Manager from './User.js'
 import Customer from './User.js'
-import FetchData from './User.js'
+import FetchData from './FetchData.js'
+import FetchRoomData from './FetchData.js'
+import FetchUserData from './FetchData.js'
+
 
 class Dashboard {
   constructor(user){
@@ -34,11 +37,16 @@ class CustomerDashboard extends Dashboard {
   constructor(user){
     super(user)
     this.user = user;
+    this.name = '';
   }
   displayData(){
     let idData = new FetchData(this.user);
-    idData.chooseData('ID');
-    let customerName;
+    idData = idData.chooseData('ID');
+    console.log('dd idData', idData)
+    this.name = idData.getName(this.user);
+  }
+  welcome(){
+    return `Welcome, ${this.name}`
   }
 }
 
