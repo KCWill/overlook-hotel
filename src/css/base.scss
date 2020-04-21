@@ -23,14 +23,18 @@ header {
   background: $secondary-background;
   color: $text;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
+  padding-left: 50px;
   position: fixed;
   z-index: 10000;
   margin: 0;
   border: 0;
   font-family: 'Open Sans', sans-serif;
+  h2 {
+    position: fixed;
+    right: 10%;
+  }
 }
 
 main {
