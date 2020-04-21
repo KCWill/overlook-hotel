@@ -2,26 +2,25 @@ import $ from 'jquery';
 import User from './User.js'
 import Manager from './User.js'
 import Customer from './User.js'
-import FetchData from './User.js'
+import allData from './index.js'
+
 
 class Dashboard {
-  constructor(user){
-    this.username = user;
+  constructor(userId){
+    this.userId = userId;
   }
-  dashboardPicker(user){
-    console.log('dbp',user)
-    if(user.username.includes('customer')){
-      return new CustomerDashboard(user);
-    } else if(user.username === 'manager'){
-      return new ManagerDashboard(user);
+  dashboardPicker(userId){
+    if(this.userId > 0 && this.userId < 51){
+      return new CustomerDashboard(userId);
+    } else if(this.userId === 'manager'){
+      return new ManagerDashboard(userId);
     }
   }
 }
 
 class ManagerDashboard extends Dashboard {
-  constructor(user){
-    super(user)
-    this.user = user;
+  constructor(userId){
+    super(userId)
   }
   welcome(){
     return `Welcome, manager!`
@@ -31,14 +30,19 @@ class ManagerDashboard extends Dashboard {
 }
 
 class CustomerDashboard extends Dashboard {
-  constructor(user){
-    super(user)
-    this.user = user;
+  constructor(userId){
+    super(userId)
+    this.userId = userId.userId;
+    this.name = '';
   }
   displayData(){
-    let idData = new FetchData(this.user);
-    idData.chooseData('ID');
-    let customerName;
+    let nameIndex = parseInt(this.userId);
+    this.name = allData[0][nameIndex].name;
+    console.log(this.name)
+    this.welcome()
+  }
+  welcome(){
+    return `Welcome, ${this.name}`
   }
 }
 
