@@ -6,43 +6,82 @@ import allData from './index.js'
 
 
 class Dashboard {
-  constructor(userId){
+  constructor(userId) {
     this.userId = userId;
   }
-  dashboardPicker(userId){
-    if(this.userId > 0 && this.userId < 51){
-      return new CustomerDashboard(userId);
-    } else if(this.userId === 'manager'){
-      return new ManagerDashboard(userId);
+  dashboardPicker() {
+    if (this.userId > 0 && this.userId < 51) {
+      return new CustomerDashboard(this.userId);
+    } else if (this.userId === 'manager') {
+      return new ManagerDashboard(this.userId);
     }
   }
 }
 
 class ManagerDashboard extends Dashboard {
-  constructor(userId){
+  constructor(userId) {
     super(userId)
+    this.allBookings = [];
+    this.name = manager;
   }
-  welcome(){
+
+  displayName(){
+    return
+  }
+  
+  welcome() {
     return `Welcome, manager!`
   }
   displayData() {
+    this.welcome();
   }
 }
 
 class CustomerDashboard extends Dashboard {
-  constructor(userId){
+  constructor(userId) {
     super(userId)
-    this.userId = userId.userId;
-    this.name = '';
+    this.bookings = [];
   }
-  displayData(){
+  displayName() {
     let nameIndex = parseInt(this.userId);
     this.name = allData[0][nameIndex].name;
-    console.log(this.name)
-    this.welcome()
+    this.welcome();
+    this.sortBookings();
   }
-  welcome(){
-    return `Welcome, ${this.name}`
+  welcome() {
+    return `Welcome, ${this.name}!`
+  }
+
+  sortBookings() {
+    let filteredBookings = allData[2].filter(booking => {
+      return booking.userID === this.userId
+    })
+    this.bookings = filteredBookings;
+    this.displayBookings();
+  }
+  displayBookings() {
+    let bookings = this.bookings.reduce((acc, booking) => {
+      let roomDetails = allData[1].find(room => {
+        return room.number === booking.roomNumber
+      });
+      acc += `<section alt='Reservation Information' class='customer-reservation-card' data-id=${booking.id}>
+        <p class='res-card-date'>Date: ${booking.date}</p>
+        <p class='res-card-room'>Room number: ${booking.roomNumber}</p>
+        <p class='res-card-cost'>Cost: $${roomDetails.costPerNight}</p>
+        </section>`
+      return acc
+    }, '');
+    return bookings
+  }
+  displayTotalCost() {
+    let totalCost = this.bookings.reduce((acc, booking) => {
+      let roomDetails = allData[1].find(room => {
+        return room.number === booking.roomNumber
+      });
+      acc += roomDetails.costPerNight
+      return acc
+    }, 0);
+    return totalCost
   }
 }
 
