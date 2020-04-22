@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import './css/base.scss';
-import './images/turing-logo.png'
 import User from './User.js'
 import Manager from './User.js'
 import Customer from './User.js'
