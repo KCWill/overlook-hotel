@@ -16,6 +16,53 @@ class Dashboard {
       return new ManagerDashboard(this.userId);
     }
   }
+
+  searchCustomerReservations(text) {
+    $('.manager-search-results').empty();
+    $('#found-customer').empty();
+    let users = allData[0];
+    let rooms = allData[1];
+    let reservations = allData[2];
+    let today = new Date();
+    let foundUsers = users.filter(user => {
+      return user.name.includes(text)
+    });
+    if (foundUsers.length === 1) {
+      $('#found-customer').text(foundUsers[0].name);
+      $('.welcome-message').data('usersid',`${foundUsers[0].id}`);
+      let customerID = foundUsers[0].id;
+      let custReservations = reservations.filter(reservation => {
+        return reservation.userID === customerID
+      })
+      custReservations.sort((a, b) => {
+        let aNew = new Date(a.date)
+        let bNew = new Date(b.date)
+        return bNew - aNew
+      })
+      let searchResults = custReservations.reduce((acc, reservation) => {
+        let reservationDate = new Date(reservation.date)
+        let roomCost = rooms.find(room => {
+          return room.number === reservation.roomNumber
+        })
+        if (today < reservationDate) {
+          acc += `<section alt='Reservation Information' class='manager-reservation-card'>
+          <p class='res-card-date'>Date: ${reservation.date}</p>
+          <p class='res-card-room'>Room number: ${reservation.roomNumber}</p>
+          <p class='res-card-cost'>Cost: $${roomCost.costPerNight}</p>
+          <button type='submit' class='submit-button' data-reservationid='${reservation.id}' id='cancel-reservation-button'>Cancel Reservation</button>
+        </section>`
+        } else {
+          acc += `<section alt='Reservation Information' class='manager-reservation-card'>
+          <p class='res-card-date'>Date: ${reservation.date}</p>
+          <p class='res-card-room'>Room number: ${reservation.roomNumber}</p>
+          <p class='res-card-cost'>Cost: $${roomCost.costPerNight}</p>
+        </section>`
+        }
+        return acc
+      }, ``)
+      $('.manager-search-results').append(searchResults)
+    }
+  }
 }
 
 class ManagerDashboard extends Dashboard {
@@ -25,7 +72,7 @@ class ManagerDashboard extends Dashboard {
     this.name = 'manager';
   }
 
-  displayName(){
+  displayName() {
     return
   }
 
@@ -57,7 +104,7 @@ class CustomerDashboard extends Dashboard {
     let filteredBookings = allData[2].filter(booking => {
       return booking.userID === this.userId
     })
-    filteredBookings.sort((a,b)=>{
+    filteredBookings.sort((a, b) => {
       let aNew = new Date(a.date)
       let bNew = new Date(b.date)
       return bNew - aNew

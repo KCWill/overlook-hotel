@@ -13,24 +13,27 @@ const allData = [];
 
 window.addEventListener('load', makeFetchHappen)
 $('#login-button').click(userLogIn);
-$('#customer-book-button').click(makeNewReservation);
-$('main').on('click','button.book-button','roomnum',bookReservation);
+$('#customer-book-button').click(makeNewReservationCust);
+$('main').on('click', 'button.book-button', 'roomnum', bookReservation);
+$('main').on('click', 'button#cancel-reservation-button', 'reservationid', cancelReservation);
 $('#go-back-to-customer-dashboard').click(goBackToDashboard);
+$('#customer-search').keyup(searchCustomers);
+$('#manager-book-button').click(makeNewReservationManager);
 
 
 
-function userLogIn(){
+function userLogIn() {
   let username = $('#username-form').val();
   let password = $('#password-form').val();
-  let user = new User(username,password);
+  let user = new User(username, password);
   user = user.findTypeOfUser();
   let userId = user.getUserId();
-  if (user.verifyLogIn()){
-    displayDashboard(user,userId);
+  if (user.verifyLogIn()) {
+    displayDashboard(user, userId);
   }
 }
 
-function intializeData(usersData, roomsData, bookingsData) {
+function initializeData(usersData, roomsData, bookingsData) {
   allData.push(usersData);
   allData.push(roomsData);
   allData.push(bookingsData);
@@ -42,18 +45,18 @@ function makeFetchHappen() {
   let roomsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/rooms/rooms').then(response => response.json());
   let bookingsPromise = fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings').then(response => response.json());
   Promise.all([userPromise, roomsPromise, bookingsPromise])
-    .then(data => intializeData(data[0].users, data[1].rooms, data[2].bookings))
+    .then(data => initializeData(data[0].users, data[1].rooms, data[2].bookings))
 }
 
 
-function displayDashboard(user){
+function displayDashboard(user) {
   $('.login-page').toggleClass('hidden');
   let dashboardDisplay = user.goToDashboard();
   dashboardDisplay.displayName();
   let message = dashboardDisplay.welcome();
-  $('.welcome-message').data('usersid',`${user.userId}`);
+  $('.welcome-message').data('usersid', `${user.userId}`);
   $('.welcome-message').text(message);
-  if (dashboardDisplay.name === 'manager'){
+  if (dashboardDisplay.name === 'manager') {
     return managerDashboardView()
   }
   let bookings = dashboardDisplay.displayBookings();
@@ -62,7 +65,7 @@ function displayDashboard(user){
   $('#customer-upcoming-stays').append(bookings);
 }
 
-function managerDashboardView(){
+function managerDashboardView() {
   let reservationView = new Reservations();
   let totalRoomsAvailable = reservationView.viewTodaysAvailability();
   let totalRevenueToday = reservationView.calculateTodaysRevenue();
@@ -72,37 +75,69 @@ function managerDashboardView(){
   $('#occupancy-percentage').text(`${occupancyPercentage}%`);
 }
 
-function makeNewReservation(){
+function makeNewReservationCust() {
   $('.customer-dashboard-page').toggleClass('hidden')
   $('.make-new-reservation-page').toggleClass('hidden');
+  $('#go-back-to-customer-dashboard').toggleClass('hidden');
   let newRes = new Reservations();
   $('#submit-room-search-button').click(newRes.searchReservations)
-
 }
 
-function bookReservation(){
+function makeNewReservationManager() {
+  $('.manager-dashboard-page').toggleClass('hidden')
+  $('.make-new-reservation-page').toggleClass('hidden');
+  $('#go-back-to-manager-dashboard').toggleClass('hidden');
+  let newRes = new Reservations();
+  $('#submit-room-search-button').click(newRes.searchReservations)
+}
+
+function bookReservation() {
   let userID = Number(this.dataset.user)
   let roomNum = Number(this.dataset.roomnum)
   fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(
-      {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         "userID": userID,
         "date": this.dataset.date,
         "roomNumber": roomNum
       })
     })
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.log(err))
+    .then(response => response.json())
+    .then(response => console.log(response))
+    .catch(err => console.log(err))
+    goBackToDashboard();
 }
 
-function goBackToDashboard(){
+function goBackToDashboard() {
   $('.make-new-reservation-page').toggleClass('hidden');
   $('.customer-dashboard-page').toggleClass('hidden');
+}
+
+function searchCustomers() {
+  let manager = new Dashboard('manager')
+  let text = $('#customer-search').val()
+  manager.searchCustomerReservations(text);
+}
+
+function cancelReservation() {
+  let reservationID = Number(this.dataset.reservationid)
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "id": reservationID
+      })
+    })
+    .then(response => {
+      console.log(response)
+    })
+    .catch(err => console.log(err));
+  makeFetchHappen();
 }
 
 export default allData
