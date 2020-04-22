@@ -52,7 +52,6 @@ function makeFetchHappen() {
 function displayDashboard(user) {
   $('.login-page').toggleClass('hidden');
   let dashboardDisplay = user.goToDashboard();
-  $('.manager-dashboard-page').toggleClass('hidden')
   dashboardDisplay.displayName();
   let message = dashboardDisplay.welcome();
   $('.welcome-message').data('usersid', `${user.userId}`);
