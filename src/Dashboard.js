@@ -90,6 +90,7 @@ class CustomerDashboard extends Dashboard {
     }, 0);
     return totalCost.toFixed(2)
   }
+
 }
 
 

@@ -13,7 +13,10 @@ const allData = [];
 
 window.addEventListener('load', makeFetchHappen)
 $('#login-button').click(userLogIn);
-$('#customer-book-button').click(customerMakeNewReservation);
+$('#customer-book-button').click(makeNewReservation);
+$('main').on('click','button.book-button','roomnum',bookReservation);
+
+
 
 function userLogIn(){
   let username = $('#username-form').val();
@@ -22,7 +25,7 @@ function userLogIn(){
   user = user.findTypeOfUser();
   let userId = user.getUserId();
   if (user.verifyLogIn()){
-    displayDashboard(user, userId);
+    displayDashboard(user,userId);
   }
 }
 
@@ -47,13 +50,13 @@ function displayDashboard(user){
   let dashboardDisplay = user.goToDashboard();
   dashboardDisplay.displayName();
   let message = dashboardDisplay.welcome();
+  $('.welcome-message').data('usersid',`${user.userId}`);
   $('.welcome-message').text(message);
   if (dashboardDisplay.name === 'manager'){
     return managerDashboardView()
   }
   let bookings = dashboardDisplay.displayBookings();
   let cost = dashboardDisplay.displayTotalCost();
-  console.log('cost',cost);
   $('#customer-cost').append(cost);
   $('#customer-upcoming-stays').append(bookings);
 }
@@ -64,14 +67,37 @@ function managerDashboardView(){
   let totalRevenueToday = reservationView.calculateTodaysRevenue();
   let occupancyPercentage = reservationView.calculateOccupancyPercentage();
   $('#number-rooms-available').text(totalRoomsAvailable);
-  console.log(reservationView)
   $('#todays-revenue').text(`$${totalRevenueToday}`);
   $('#occupancy-percentage').text(`${occupancyPercentage}%`);
 }
 
-function customerMakeNewReservation(){
+function makeNewReservation(){
   $('.customer-dashboard-page').toggleClass('hidden')
-  
+  $('.make-new-reservation-page').toggleClass('hidden');
+  let newRes = new Reservations();
+  $('#submit-room-search-button').click(newRes.searchReservations)
+
 }
+
+function bookReservation(){
+  let userID = Number(this.dataset.user)
+  let roomNum = Number(this.dataset.roomnum)
+  fetch('https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+      {
+        "userID": userID,
+        "date": this.dataset.date,
+        "roomNumber": roomNum
+      })
+    })
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.log(err))
+}
+
 
 export default allData
