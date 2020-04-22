@@ -43,8 +43,6 @@ class Reservations {
       }
       return acc
     }, [])
-    console.log('m', matchedRoomType)
-    console.log('aR', availableRooms)
     let freeRooms = availableRooms.reduce((acc, room) => {
       if (matchedRoomType.includes(room)) {
         acc.push(room)
@@ -95,7 +93,6 @@ class Reservations {
     let reservationsToday = this.reservations.filter((reservation) => {
       return reservation.date === this.todaysDate
     })
-    console.log(reservationsToday);
     return reservationsToday
   }
 
@@ -104,8 +101,6 @@ class Reservations {
     this.getTodaysDate();
     let reservationsToday = this.listTodaysReservations();
     let totalRoomsAvailable = this.rooms.length - reservationsToday.length;
-    console.log('alaska', this.rooms.length)
-    console.log(totalRoomsAvailable)
     return totalRoomsAvailable
   }
 
@@ -121,13 +116,15 @@ class Reservations {
       })
       return acc
     }, 0)
-    return revenue
+    return revenue.toFixed(2)
   }
   calculateOccupancyPercentage() {
     this.rooms = allData[1];
     let percentage = Math.round(100 * (this.listTodaysReservations().length / this.rooms.length))
     return percentage;
   }
+
+
 }
 
 export default Reservations

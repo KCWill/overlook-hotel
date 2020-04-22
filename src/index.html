@@ -51,17 +51,12 @@
       <section alt='Search customer bookings' class='manager-view-data'>
         <section alt='Search for customer data' class='manager-search-container'>
           <h2>Search Customer by Name:
-            <input alt='Customer search form' type='text' placeholder='Customer name'></h2>
-          <button type='submit' class='manager-button-create-reservation' id='manager-book-button'>Make a New Reservation</button>
+            <input alt='Customer search form' type='text' placeholder='Customer name' id='customer-search'></h2>
+          <button type='submit' class='manager-button-create-reservation hidden' id='manager-book-button'>Make a New Reservation</button>
         </section>
       </section>
+      <h3 id='found-customer'></h3>
       <section alt='Customer bookings' class='manager-search-results'>
-        <section alt='Reservation Information' class='manager-reservation-card'>
-          <p class='res-card-date'>Date:</p>
-          <p class='res-card-room'>Room number:</p>
-          <p class='res-card-cost'>Cost:</p>
-          <button type='submit' class='submit-button' id='cancel-reservation-button'>Cancel Reservation</button>
-        </section>
       </section>
     </section>
     </section>
@@ -112,7 +107,8 @@
       <section class='available-reservations-container'>
       </section>
       <section>
-        <button type='submit' class='submit-button' id='go-back-to-customer-dashboard'>Go Back to Customer Dashboard</button>
+        <button type='submit' class='submit-button hidden' id='go-back-to-customer-dashboard'>Go Back to Customer Dashboard</button>
+        <button type='submit' class='submit-button hidden' id='go-back-to-manager-dashboard'>Go Back to Manager Dashboard</button>
       </section>
     </section>
   </main>
