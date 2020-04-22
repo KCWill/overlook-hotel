@@ -16,7 +16,8 @@ $('#login-button').click(userLogIn);
 $('#customer-book-button').click(makeNewReservationCust);
 $('main').on('click', 'button.book-button', 'roomnum', bookReservation);
 $('main').on('click', 'button#cancel-reservation-button', 'reservationid', cancelReservation);
-$('#go-back-to-customer-dashboard').click(goBackToDashboard);
+$('#go-back-to-customer-dashboard').click(goBackToDashboardCustomer);
+$('#go-back-to-manager-dashboard').click(goBackToDashboardManager);
 $('#customer-search').keyup(searchCustomers);
 $('#manager-book-button').click(makeNewReservationManager);
 
@@ -108,10 +109,10 @@ function bookReservation() {
     .then(response => response.json())
     .then(response => console.log(response))
     .catch(err => console.log(err))
-    goBackToDashboard();
+    $(this).addClass('hidden');
 }
 
-function goBackToDashboard() {
+function goBackToDashboardCustomer() {
   $('.make-new-reservation-page').toggleClass('hidden');
   $('.customer-dashboard-page').toggleClass('hidden');
 }
@@ -137,7 +138,12 @@ function cancelReservation() {
       console.log(response)
     })
     .catch(err => console.log(err));
-  makeFetchHappen();
+    $(this).addClass('hidden')
+}
+
+function goBackToDashboardManager() {
+  $('.make-new-reservation-page').addClass('hidden');
+  $('.manager-dashboard-page').removeClass('hidden');
 }
 
 export default allData

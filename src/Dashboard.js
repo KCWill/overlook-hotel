@@ -20,6 +20,7 @@ class Dashboard {
   searchCustomerReservations(text) {
     $('.manager-search-results').empty();
     $('#found-customer').empty();
+    $('.manager-button-create-reservation').addClass('hidden')
     let users = allData[0];
     let rooms = allData[1];
     let reservations = allData[2];
@@ -28,6 +29,7 @@ class Dashboard {
       return user.name.includes(text)
     });
     if (foundUsers.length === 1) {
+      $('.manager-button-create-reservation').toggleClass('hidden');
       $('#found-customer').text(foundUsers[0].name);
       $('.welcome-message').data('usersid',`${foundUsers[0].id}`);
       let customerID = foundUsers[0].id;
