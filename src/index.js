@@ -15,6 +15,7 @@ window.addEventListener('load', makeFetchHappen)
 $('#login-button').click(userLogIn);
 $('#customer-book-button').click(makeNewReservation);
 $('main').on('click','button.book-button','roomnum',bookReservation);
+$('#go-back-to-customer-dashboard').click(goBackToDashboard);
 
 
 
@@ -99,5 +100,9 @@ function bookReservation(){
       .catch(err => console.log(err))
 }
 
+function goBackToDashboard(){
+  $('.make-new-reservation-page').toggleClass('hidden');
+  $('.customer-dashboard-page').toggleClass('hidden');
+}
 
 export default allData

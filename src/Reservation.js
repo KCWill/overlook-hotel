@@ -51,7 +51,10 @@ class Reservations {
       }
       return acc
     }, [])
-
+    if(freeRooms.length === 0){
+      $('.available-reservations-container').append(`<h3>We are so sorry, but there is no availability for the options you selected.`)
+      return
+    }
     let foundReservations = freeRooms.reduce((acc, roomNum) => {
       let roomToReserve = this.rooms.find(room => {
         return room.number === roomNum
@@ -87,22 +90,27 @@ class Reservations {
   }
 
   listTodaysReservations() {
+    this.reservations = allData[2];
     this.getTodaysDate();
     let reservationsToday = this.reservations.filter((reservation) => {
       return reservation.date === this.todaysDate
     })
+    console.log(reservationsToday);
     return reservationsToday
   }
 
   viewTodaysAvailability() {
+    this.rooms = allData[1];
     this.getTodaysDate();
     let reservationsToday = this.listTodaysReservations();
     let totalRoomsAvailable = this.rooms.length - reservationsToday.length;
     console.log('alaska', this.rooms.length)
+    console.log(totalRoomsAvailable)
     return totalRoomsAvailable
   }
 
   calculateTodaysRevenue() {
+    this.rooms = allData[1];
     this.getTodaysDate();
     let reservationsToday = this.listTodaysReservations();
     let revenue = reservationsToday.reduce((acc, reservation) => {
@@ -116,6 +124,7 @@ class Reservations {
     return revenue
   }
   calculateOccupancyPercentage() {
+    this.rooms = allData[1];
     let percentage = Math.round(100 * (this.listTodaysReservations().length / this.rooms.length))
     return percentage;
   }
