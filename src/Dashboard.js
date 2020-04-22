@@ -22,18 +22,19 @@ class ManagerDashboard extends Dashboard {
   constructor(userId) {
     super(userId)
     this.allBookings = [];
-    this.name = manager;
+    this.name = 'manager';
   }
 
   displayName(){
     return
   }
-  
+
   welcome() {
     return `Welcome, manager!`
   }
   displayData() {
     this.welcome();
+
   }
 }
 
@@ -56,9 +57,15 @@ class CustomerDashboard extends Dashboard {
     let filteredBookings = allData[2].filter(booking => {
       return booking.userID === this.userId
     })
+    filteredBookings.sort((a,b)=>{
+      let aNew = new Date(a.date)
+      let bNew = new Date(b.date)
+      return bNew - aNew
+    })
     this.bookings = filteredBookings;
     this.displayBookings();
   }
+
   displayBookings() {
     let bookings = this.bookings.reduce((acc, booking) => {
       let roomDetails = allData[1].find(room => {
@@ -67,7 +74,7 @@ class CustomerDashboard extends Dashboard {
       acc += `<section alt='Reservation Information' class='customer-reservation-card' data-id=${booking.id}>
         <p class='res-card-date'>Date: ${booking.date}</p>
         <p class='res-card-room'>Room number: ${booking.roomNumber}</p>
-        <p class='res-card-cost'>Cost: $${roomDetails.costPerNight}</p>
+        <p class='res-card-cost'>Cost: $${roomDetails.costPerNight.toFixed(2)}</p>
         </section>`
       return acc
     }, '');
@@ -81,7 +88,7 @@ class CustomerDashboard extends Dashboard {
       acc += roomDetails.costPerNight
       return acc
     }, 0);
-    return totalCost
+    return totalCost.toFixed(2)
   }
 }
 
