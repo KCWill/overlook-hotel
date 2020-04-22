@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import './css/base.scss';
-import './images/turing-logo.png'
 import User from './User.js'
 import Manager from './User.js'
 import Customer from './User.js'
@@ -107,7 +106,6 @@ function bookReservation() {
       })
     })
     .then(response => response.json())
-    .then(response => console.log(response))
     .catch(err => console.log(err))
     $(this).addClass('hidden');
 }
