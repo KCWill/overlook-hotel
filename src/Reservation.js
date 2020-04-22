@@ -2,9 +2,7 @@ import $ from 'jquery';
 import User from './User.js'
 import Manager from './User.js'
 import Customer from './User.js'
-import Room from './Room.js'
 import allData from './index.js'
-
 
 class Reservations {
   constructor() {

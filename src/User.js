@@ -1,6 +1,7 @@
 import Dashboard from './Dashboard.js'
 import CustomerDashboard from './Dashboard.js'
 import ManagerDashboard from './Dashboard.js'
+import $ from 'jquery';
 
 class User {
   constructor(username, password){
