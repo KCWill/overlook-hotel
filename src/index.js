@@ -7,11 +7,13 @@ import Customer from './User.js'
 import Dashboard from './Dashboard.js'
 import ManagerDashboard from './Dashboard.js'
 import CustomerDashboard from './Dashboard.js'
+import Reservations from './Reservation.js'
 
 const allData = [];
 
 window.addEventListener('load', makeFetchHappen)
 $('#login-button').click(userLogIn);
+$('#customer-book-button').click(customerMakeNewReservation);
 
 function userLogIn(){
   let username = $('#username-form').val();
@@ -19,7 +21,6 @@ function userLogIn(){
   let user = new User(username,password);
   user = user.findTypeOfUser();
   let userId = user.getUserId();
-  console.log(allData)
   if (user.verifyLogIn()){
     displayDashboard(user, userId);
   }
@@ -46,11 +47,31 @@ function displayDashboard(user){
   let dashboardDisplay = user.goToDashboard();
   dashboardDisplay.displayName();
   let message = dashboardDisplay.welcome();
+  $('.welcome-message').text(message);
+  if (dashboardDisplay.name === 'manager'){
+    return managerDashboardView()
+  }
   let bookings = dashboardDisplay.displayBookings();
   let cost = dashboardDisplay.displayTotalCost();
   console.log('cost',cost);
   $('#customer-cost').append(cost);
-  $('.customer-reservations').append(bookings);
-  $('.welcome-message').text(message);
+  $('#customer-upcoming-stays').append(bookings);
 }
+
+function managerDashboardView(){
+  let reservationView = new Reservations();
+  let totalRoomsAvailable = reservationView.viewTodaysAvailability();
+  let totalRevenueToday = reservationView.calculateTodaysRevenue();
+  let occupancyPercentage = reservationView.calculateOccupancyPercentage();
+  $('#number-rooms-available').text(totalRoomsAvailable);
+  console.log(reservationView)
+  $('#todays-revenue').text(`$${totalRevenueToday}`);
+  $('#occupancy-percentage').text(`${occupancyPercentage}%`);
+}
+
+function customerMakeNewReservation(){
+  $('.customer-dashboard-page').toggleClass('hidden')
+  
+}
+
 export default allData
